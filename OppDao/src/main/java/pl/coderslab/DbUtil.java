@@ -3,7 +3,7 @@ package pl.coderslab;
 import java.sql.*;
 
 public class DbUtil {
-    public static final String DB_NAME = "cinemas_ex";
+    public static final String DB_NAME = "workshop2";
     private static final String DB_URL= String.format("jdbc:mysql://localhost:3306/%s?useSSL=false&characterEncoding=utf8&serverTimezone=UTC", DB_NAME);
     private static final String DB_USER= "root";
     private static final String DB_PASS = "coderslab";
@@ -11,7 +11,7 @@ public class DbUtil {
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
-    public static void insert(Connection conn, String query, String... params) {
+    /*public static void insert(Connection conn, String query, String... params) {
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             for (int i = 0; i < params.length; i++) {
                 statement.setString(i + 1, params[i]);
@@ -56,7 +56,7 @@ public class DbUtil {
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
 
 
