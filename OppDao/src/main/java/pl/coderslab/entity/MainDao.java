@@ -6,12 +6,12 @@ public class MainDao {
     public static void main(String[] args) {
 
         // Tworzenie usera:
-        // User newUser1 = new User("Janina Kowalska", "jankow@wp.pl", "fruzia5@");
-        // User createUser1 = userDao.create(newUser1);
+        // User newUser41 = new User("Janina Kowalska", "jankow@wp.pl", "fruzia5@");
+        // User createUser41 = userDao.create(newUser41);
 
         // Odczyt usera:
         // - istniejącego:
-        // System.out.println(userDao.read(1));
+        // System.out.println(userDao.read(15));
         // - nieistniejącego (informuje o błędzie, zwraca null):
         // System.out.println(userDao.read(99999));
 
@@ -25,21 +25,17 @@ public class MainDao {
 
         // Usunięcie usera:
         // UserDao userDao = new UserDao();
-        // userDao.delete(1);
+        // userDao.delete(25);
 
         // Listing wszystkich userów:
-//        UserDao userDao = new UserDao();
-//        User[] allUsers = userDao.findAll();
-//        if (allUsers != null) {
-//            for (int i = 0; i < allUsers.length; i++) {
-//                if (allUsers[i] == null) {
-//                    System.out.println("null");
-//                } else {
-//                    System.out.println(allUsers[i]);
-//                }
-//            }
-//        } else {
-//            System.out.println("Database is empty.");
-//        }
+        UserDao userDao = new UserDao();
+        User[] allUsers = userDao.findAll();
+        if (allUsers.length != 0) {
+            for (User a : allUsers) {
+                    System.out.println(a);
+                }
+        } else {
+            System.out.println("Database is empty.");
+        }
     }
 }

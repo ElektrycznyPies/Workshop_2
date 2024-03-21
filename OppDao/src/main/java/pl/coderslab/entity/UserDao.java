@@ -1,4 +1,5 @@
 package pl.coderslab.entity;
+import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.DbUtil;
 import java.sql.*;
 import java.util.Arrays;
@@ -10,15 +11,13 @@ public class UserDao extends DbUtil {
     private static final String DEL_USER_QUERY = "DELETE FROM users WHERE id = ?";
     private static final String LIST_ALL_QUERY = "SELECT * FROM users";
 
-// DODAĆ: hashowanie hasła
-
     //         CREATE
     public User create(User user) {
         try (Connection conn = connect();) {
             PreparedStatement prepStat = conn.prepareStatement(CREATE_USER_QUERY, PreparedStatement.RETURN_GENERATED_KEYS);
             prepStat.setString(1, user.getUserName());
             prepStat.setString(2, user.getEmail());
-            prepStat.setString(3, user.getPassword()); // hashPassword(user.getPassword()));
+            prepStat.setString(3, hashPassword(user.getPassword()));
             prepStat.executeUpdate();
 
             ResultSet rs = prepStat.getGeneratedKeys();
@@ -32,6 +31,11 @@ public class UserDao extends DbUtil {
             return null;
         }
         return user;
+    }
+
+    //        HASHOWANIE HASŁA
+    public String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     //         READ
@@ -67,7 +71,7 @@ public class UserDao extends DbUtil {
             int rowsUpdated = prepStat.executeUpdate();
 
             if (rowsUpdated > 0) {
-                System.out.println("User no. " + user.getId() + " updated.");
+                System.out.printf("User no. %d updated.", user.getId());
             } else {
                 System.out.println("No users updated.");
             }
@@ -85,7 +89,7 @@ public class UserDao extends DbUtil {
             int rowsUpdated = prepStat.executeUpdate();
 
             if (rowsUpdated > 0) {
-                System.out.println("User no. " + userId + " deleted.");
+                System.out.printf("User no. %d deleted.", userId);
             } else {
                 System.out.println("No users deleted.");
             }
@@ -110,11 +114,11 @@ public class UserDao extends DbUtil {
                 nextUser.setUserName(rs.getString("username"));
                 nextUser.setEmail(rs.getString("email"));
                 nextUser.setPassword(rs.getString("password"));
-
+                //AlBO  User nextUser = new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"));
                 allUsers = addToArray(nextUser, allUsers);
-
             }
             return allUsers;
+
         } catch (SQLException e) {
             System.out.println("Database problem: " + e.getMessage());
         }
