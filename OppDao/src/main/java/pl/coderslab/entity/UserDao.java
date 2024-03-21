@@ -10,7 +10,7 @@ public class UserDao extends DbUtil {
     private static final String DEL_USER_QUERY = "DELETE FROM users WHERE id = ?";
     private static final String LIST_ALL_QUERY = "SELECT * FROM users";
 
-
+// DODAĆ: hashowanie hasła
 
     //         CREATE
     public User create(User user) {
