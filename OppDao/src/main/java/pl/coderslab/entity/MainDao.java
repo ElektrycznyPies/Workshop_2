@@ -27,6 +27,19 @@ public class MainDao {
         // UserDao userDao = new UserDao();
         // userDao.delete(1);
 
-
+        // Listing wszystkich userów:
+//        UserDao userDao = new UserDao();
+//        User[] allUsers = userDao.findAll();
+//        if (allUsers != null) {
+//            for (int i = 0; i < allUsers.length; i++) {
+//                if (allUsers[i] == null) {
+//                    System.out.println("null");
+//                } else {
+//                    System.out.println(allUsers[i]);
+//                }
+//            }
+//        } else {
+//            System.out.println("Database is empty.");
+//        }
     }
 }

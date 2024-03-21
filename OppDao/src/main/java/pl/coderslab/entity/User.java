@@ -15,6 +15,14 @@ public class User {
         this.password = password;
     }
 
+    public User(int id, String userName, String email, String password) {    //konstruktor z uwzgl. ID
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+    public User() {     // konstruktor pusty
+    }
 
     public int getId() {
         return id;
